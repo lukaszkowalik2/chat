@@ -1,17 +1,18 @@
 import React from 'react'
 import {Camera, Landscape,Plus,Pin,Emoji,Like} from './svgs'
-// import { doc, setDoc } from "firebase/firestore"; 
-
+import { collection, addDoc } from "firebase/firestore"; 
+import db from '../../firebase'
 // Add a new document in collection "cities"
 
 const chatFooter = () => {
-  // await setDoc(doc(db, "cities", "LA"), {
-  //   name: "Los Angeles",
-  //   state: "CA",
-  //   country: "USA"
-  // });
-  const Submit = (e) => {
+
+  const Submit = async (e) => {
     e.preventDefault();
+    const docRef = await addDoc(collection(db, "cities"), {
+      name: "Tokyo",
+      country: "Japan"
+    });
+    console.log("Document written with ID: ", docRef.id);
   }
   return (
     <div class="chat-area-footer">
@@ -20,7 +21,7 @@ const chatFooter = () => {
       <Plus/>
       <Pin/>
       <form onSubmit={Submit}>
-       <input type="text" placeholder="Type something here..." o/>
+       <input type="text" placeholder="Type something here..."/>
       </form>
       <Emoji/>
       <Like/>

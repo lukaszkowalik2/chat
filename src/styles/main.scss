@@ -493,7 +493,7 @@ html {
   }
 }
 
-.chat-area-footer input {
+.chat-area-footer form input {
   border: none;
   color: var(--body-color);
   background-color: var(--input-bg);
@@ -501,10 +501,13 @@ html {
   border-radius: 6px;
   font-size: 15px;
   margin: 0 12px;
-  width: 100%;
+  width: 97%;
   &::placeholder {
     color: var(--input-chat-color);
   }
+}
+.chat-area-footer form {
+  width: 95%;
 }
 
 .detail-area-header {

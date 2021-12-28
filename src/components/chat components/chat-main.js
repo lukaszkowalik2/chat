@@ -1,5 +1,13 @@
-import React, { useState } from 'react'
+import React, { useRef, useEffect } from 'react'
 const ChatMain = ({messages}) => {
+  const messagesEndRef = useRef(null)
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
+  }
+  useEffect(() => {
+    scrollToBottom()
+  }, [messages]);
 
   return (
     <div className="chat-area-main">
@@ -32,6 +40,8 @@ const ChatMain = ({messages}) => {
       )
     })
     }
+    <div ref={messagesEndRef} />
+
     </div>
   );
 }

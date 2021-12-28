@@ -1,5 +1,5 @@
 import React, {useState,useEffect} from 'react'
-import { onSnapshot, collection, orderBy, limit }  from '@firebase/firestore';
+import { onSnapshot, collection, orderBy, query }  from '@firebase/firestore';
 import './styles/main.scss'
 import 'firebase/storage';
 import LeftSideBar from './components/leftSideBar';
@@ -12,7 +12,8 @@ const App = () => {
   const [path,setPath] = useState(window.location.href.split('/')[3])
   const [messages,setMessages] = useState(undefined)
   useEffect(() => {
-      onSnapshot(collection(db, `${path}` ) ,orderBy("time"),(snapshot) => {
+    const q = query(collection(db, `${path}`),orderBy('id'))
+      onSnapshot(q,(snapshot) => {
           setMessages(snapshot.docs.map(doc => doc.data()))
         })
   },[])

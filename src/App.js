@@ -1,26 +1,35 @@
-import React, {useEffect} from 'react'
-import { onSnapshot, collection } from '@firebase/firestore';
+import React, {useState,useEffect} from 'react'
+import { onSnapshot, collection, orderBy, limit }  from '@firebase/firestore';
 import './styles/main.scss'
+import 'firebase/storage';
 import LeftSideBar from './components/leftSideBar';
 import Chat from './components/chat'
 import Details from './components/details';
 import Header from './components/header';
 import db from './firebase'
+import Loading from './components/Pages/Loading'
 const App = () => {
+  const [path,setPath] = useState(window.location.href.split('/')[3])
+  const [messages,setMessages] = useState(undefined)
   useEffect(() => {
-    onSnapshot(collection(db, "1" ),(snapshot) => {
-      console.log(snapshot.docs.map(doc => doc.data()))
-    })
-  });
+      onSnapshot(collection(db, `${path}` ) ,orderBy("time"),(snapshot) => {
+          setMessages(snapshot.docs.map(doc => doc.data()))
+        })
+  },[])
+  console.log(messages)
+
   return (
-    <div class="app">
-      <Header/>
-    <div class="wrapper">
-      <LeftSideBar/>
-      <Chat/>
-      <Details/>
-    </div>
-  </div>
+    <>
+    {messages ? 
+      <div className="app">
+        <Header/>
+        <div className="wrapper">
+           <LeftSideBar/>
+           <Chat path={path} messages={messages}/>
+           <Details/>
+        </div>
+      </div>: <Loading/>}
+    </>
 );
 }
  

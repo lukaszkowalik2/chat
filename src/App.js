@@ -16,6 +16,7 @@ const App = () => {
       onSnapshot(q,(snapshot) => {
           setMessages(snapshot.docs.map(doc => doc.data()))
         })
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   },[])
   return (
     <>

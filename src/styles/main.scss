@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Manrope:300,400,500,600,700&display=swap&subset=latin-ext');
-
+$shadow1: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 :root {
   --body-bg-color: #e5ecef;
   --theme-bg-color: #fff;
@@ -782,5 +782,42 @@ html {
     input {
       padding-right: 10px;
     }
+  }
+}
+.linkToLogIn {
+  color: white;
+  border: none;
+  outline: none;
+  font-size: 24px;
+  font-weight: 200;
+  overflow: hidden;
+  position: relative;
+  border-radius: 2px;
+  letter-spacing: 2px;
+  box-shadow: $shadow1;
+  text-transform: uppercase;
+  background-color: #00a7ee;
+  & {
+    z-index: 2;
+    display: block;
+    padding: 10px 20px;
+    position: relative;
+    margin-top: 1%;
+    text-decoration: none;
+    cursor: pointer;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  &:after {
+    top: -50%;
+    z-index: 1;
+    content: '';
+    width: 150%;
+    height: 200%;
+    position: absolute;
+    left: calc(-150% - 40px);
+    background-color: rgba(255, 255, 255, 0.2);
   }
 }

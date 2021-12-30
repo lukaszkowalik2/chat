@@ -1,6 +1,8 @@
-import React, {useEffect} from 'react'
+import React, {useEffect,useState} from 'react'
 import '../../styles/SignUp.scss'
-const SignUp = () => {
+const Login = () => {
+  const [loginEmail,setLoginEmail] = useState("")
+  const [loginPassword,setLoginPassword] = useState("")
   useEffect(() => {
     document.getElementById('name').addEventListener("keyup", function(e) {
       if (e.key === 27 || e.key === 13) {
@@ -21,6 +23,7 @@ const SignUp = () => {
     }
   }
   return (
+<div id="bodyLogin">
     <div id="mainButton">
     <div className="btn-text" onClick={() => document.getElementById('mainButton').className = 'active'}>Sign In</div>
 	<div className="modal">
@@ -37,7 +40,9 @@ const SignUp = () => {
 		<div className="form-button"onClick={() => document.getElementById('mainButton').className = ''}>Go</div>
 	</div>
 </div>
+  <a className="btn-text-link" href="http://localhost:3000/signup">Sign Up</a>
+</div>
   );
 }
  
-export default SignUp;
+export default Login;

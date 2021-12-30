@@ -1,7 +1,9 @@
 import React from 'react'
 import ChatFooter from './chat components/chat-footer'
 import ChatMain from './chat components/chat-main'
-const chat = ({path, messages}) => {
+
+const Chat = ({path, messages}) => {
+
 
   return (
     <div className="chat-area">
@@ -20,4 +22,4 @@ const chat = ({path, messages}) => {
   );
 }
  
-export default chat;
+export default Chat;

@@ -1,12 +1,12 @@
 import React, { useRef, useEffect } from 'react'
 const ChatMain = ({messages}) => {
   const messagesEndRef = useRef(null)
-
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
   }
   useEffect(() => {
     scrollToBottom()
+    localStorage.setItem("lastChat",`${window.location.href}`);
   }, [messages]);
 
   return (
@@ -32,16 +32,12 @@ const ChatMain = ({messages}) => {
         </div>
         <div className="chat-msg-content">
          <div className="chat-msg-text">{message.message}</div>
-          {/* <div className="chat-msg-text">
-            <img src="https://media0.giphy.com/media/yYSSBtDgbbRzq/giphy.gif?cid=ecf05e47344fb5d835f832a976d1007c241548cc4eea4e7e&rid=giphy.gif" alt='' /></div>
-          <div className="chat-msg-text">Neque gravida in fermentum et sollicitudin ac orci phasellus egestas. Pretium lectus quam id leo.</div> */}
         </div>
         </div>
       )
     })
     }
     <div ref={messagesEndRef} />
-
     </div>
   );
 }

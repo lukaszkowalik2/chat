@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
-import {Camera, Landscape,Plus,Pin,Emoji,Like} from './svgs'
-import { collection, addDoc,doc, setDoc  } from "firebase/firestore"; 
+import {Camera, Landscape,Plus,Pin,Emoji,Like} from '../svgs'
+import { doc, setDoc  } from "firebase/firestore"; 
 import db from '../../firebase'
 
 const ChatFooter = ({path, messages}) => {

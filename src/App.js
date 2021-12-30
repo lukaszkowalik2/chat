@@ -9,13 +9,14 @@ import Header from './components/header';
 import db from './firebase'
 import Loading from './components/Pages/Loading'
 const App = () => {
-  const [path,setPath] = useState(window.location.href.split('/')[3])
+  const [path,setPath] = useState(window.location.href.split('/')[4])
   const [messages,setMessages] = useState(undefined)
   useEffect(() => {
     const q = query(collection(db, `${path}`),orderBy('id'))
       onSnapshot(q,(snapshot) => {
           setMessages(snapshot.docs.map(doc => doc.data()))
         })
+        console.log(localStorage)
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[])
   return (

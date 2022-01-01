@@ -9,6 +9,7 @@ const Login = () => {
   const [user,setUser] = useState({})
   onAuthStateChanged(auth, (currentUser) => {
     setUser(currentUser)
+    localStorage.setItem('uid', currentUser.uid)
   })
   useEffect(() => {
     document.getElementById('name').addEventListener("keyup", function(e) {
@@ -32,7 +33,7 @@ const Login = () => {
   const register = async () => {
     try{
       await createUserWithEmailAndPassword(auth, email, password);
-      console.log(user.email)
+      window.location.href = `${localStorage.getItem("lastChat")}`
     } catch(err){
       console.error(err.message);
     }

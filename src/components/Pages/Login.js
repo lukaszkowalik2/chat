@@ -1,8 +1,10 @@
 import React, {useEffect,useState} from 'react'
 import '../../styles/SignUp.scss'
+import { signInWithEmailAndPassword } from "firebase/auth";
+import {auth} from '../../firebase'
 const Login = () => {
-  const [loginEmail,setLoginEmail] = useState("")
-  const [loginPassword,setLoginPassword] = useState("")
+  const [email,setEmail] = useState("")
+  const [password,setPassword] = useState("")
   useEffect(() => {
     document.getElementById('name').addEventListener("keyup", function(e) {
       if (e.key === 27 || e.key === 13) {
@@ -22,6 +24,14 @@ const Login = () => {
       e.className = '';
     }
   }
+  const click = (e) => {
+    signInWithEmailAndPassword(auth,email,password)
+    .then((userCredential) => {
+      const user = userCredential.user
+      localStorage.setItem('uid', user.uid)
+      window.location.href = `${localStorage.getItem("lastChat")}`
+    })
+  }
   return (
 <div id="bodyLogin">
     <div id="mainButton">
@@ -30,14 +40,14 @@ const Login = () => {
   <div className="close-button"  onClick={() => document.getElementById('mainButton').className = ''}>x</div>
 		<div className="form-title">Sign In</div>
 		<div className="input-group">
-			<input type="text" id="name" onBlur={checkInput} />
+			<input type="text" id="name" onBlur={checkInput} onChange={(e) => setEmail(e.target.value)} value={email}/>
 			<label htmlFor="name">Username</label>
 		</div>
 		<div className="input-group">
-			<input type="password" id="password" onBlur={checkInput} />
+			<input type="password" id="password" onBlur={checkInput} onChange={(e) => setPassword(e.target.value)}  value={password}/>
 			<label htmlFor="password">Password</label>
 		</div>
-		<div className="form-button"onClick={() => document.getElementById('mainButton').className = ''}>Go</div>
+		<div className="form-button"onClick={click} >Go</div>
 	</div>
 </div>
   <a className="btn-text-link" href="http://localhost:3000/signup">Sign Up</a>

@@ -15,7 +15,7 @@ const ChatFooter = ({path, messages}) => {
       await setDoc(doc(db, `${path}`, `${id}`), {
         message: text.trim(),
         isImage: false,
-        userID: 123,
+        userID: localStorage.getItem('uid'),
         time: Date.now(),
         id: id
       });

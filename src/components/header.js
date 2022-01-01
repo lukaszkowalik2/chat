@@ -1,20 +1,17 @@
 import React, { useEffect,useState} from 'react'
 import { onAuthStateChanged } from "firebase/auth";
 import {auth} from '../firebase'
-import {Logo, DarkLight, Settings} from './svgs'
+import {Logo, DarkLight} from './svgs'
+import Settings from './chat components/Setting'
 const Header = () => {
-  const [uID, setID] = useState("")
+  const [uID, setID] = useState(localStorage.getItem('uid'))
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        // User is signed in, see docs for a list of available properties
-        // https://firebase.google.com/docs/reference/js/firebase.User
         const uid = user.uid;
-        setID(uid)
-        // ...
+        localStorage.setItem('uid', uid)
       } else {
-        // User is signed out
-        // ...
+        localStorage.setItem('uid', "")
       }
     });
   })

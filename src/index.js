@@ -6,6 +6,7 @@ import App from './App';
 import Login from './components/Pages/Login'
 import Redict from './components/Pages/Redict'
 import SignUp from './components/Pages/SignUp'
+import Profile from './components/Pages/Profile'
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
@@ -14,6 +15,7 @@ ReactDOM.render(
         <Route path='/t/*' element={<App />}/>
         <Route path="/" element={<Redict/>}/>
         <Route path="/signup" element={<SignUp/>}/>
+        <Route path="/profile" element={<Profile/>}/>
       </Routes>
     </BrowserRouter>
   </React.StrictMode>,

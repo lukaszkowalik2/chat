@@ -15,6 +15,7 @@ const Settings = () => {
       await signOut(auth);
       localStorage.removeItem('uid')
       setClicked(false)
+      window.location.reload(false);
     } catch (err){
      console.log(err)
     } 

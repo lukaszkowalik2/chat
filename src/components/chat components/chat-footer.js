@@ -1,8 +1,8 @@
 import React, {useState} from 'react'
-import {Camera, Landscape,Plus,Pin,Emoji,Like} from '../svgs'
+import {Camera, Landscape,Plus,Emoji,Like} from '../svgs'
 import { doc, setDoc  } from "firebase/firestore"; 
 import db from '../../firebase'
-
+import FileUpload from './FileUpload'
 const ChatFooter = ({path, messages}) => {
   const [text,setText] = useState("")
   const Submit = async (e) => {
@@ -11,7 +11,7 @@ const ChatFooter = ({path, messages}) => {
       console.log('string only contains whitespace (ie. spaces, tabs or line breaks)');
     } else {
       let lastElement = messages[messages.length - 1];
-      let id = lastElement.id + 1
+      let id = parseInt(lastElement.id) + 1
       await setDoc(doc(db, `${path}`, `${id}`), {
         message: text.trim(),
         isImage: false,
@@ -27,7 +27,7 @@ const ChatFooter = ({path, messages}) => {
       <Camera/>
       <Landscape/>
       <Plus/>
-      <Pin/>
+      <FileUpload messages={messages} path={path}/>
       <form onSubmit={Submit}>
        <input autoComplete="off" placeholder="Type something here..." value={text} onChange={(e) => setText(e.target.value)} />
       </form>

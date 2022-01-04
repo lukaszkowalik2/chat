@@ -4,7 +4,7 @@ import {auth} from '../firebase'
 import {Logo, DarkLight} from './svgs'
 import Settings from './chat components/Setting'
 const Header = () => {
-  const [uID, setID] = useState(localStorage.getItem('uid'))
+  const [uID] = useState(localStorage.getItem('uid'))
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {

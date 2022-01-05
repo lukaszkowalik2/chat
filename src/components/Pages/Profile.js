@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import '../../styles/profile.css'
+import '../../styles/profile.scss'
 import {onAuthStateChanged } from 'firebase/auth'
 import {auth} from '../../firebase'
 const Profile = () => {

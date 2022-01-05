@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import {Pin} from '../svgs'
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
-// import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { doc, setDoc  } from "firebase/firestore"; 
 import db from '../../firebase'
 import 'firebase/storage';
@@ -59,11 +58,12 @@ uploadTask.on('state_changed',
 );
       
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   },[image])
   return (
     <>
       <input type="file" hidden={true} ref={refParam => inputRef = refParam} accept="image/png, image/gif, image/jpeg, image/jpg" onInput={handleChange}/>
-      <button style={{ backgroundColor: '#ffffff', marginLeft: '12px', color: '#c1c7cd', cursor: 'pointer', marginTop: '4px'}} onClick={() => inputRef.click()}><Pin/></button>
+      <button style={{ backgroundColor: 'transparent', marginLeft: '12px', color: '#c1c7cd', cursor: 'pointer', marginTop: '4px'}} onClick={() => inputRef.click()}><Pin/></button>
     </>
   );
 }

@@ -1,8 +1,9 @@
 import React, {useState} from 'react'
-import {Camera, Landscape,Plus,Emoji,Like} from '../svgs'
+import {Camera, Landscape,Plus,Like} from '../svgs'
 import { doc, setDoc  } from "firebase/firestore"; 
 import db from '../../firebase'
 import FileUpload from './FileUpload'
+import Emoji from './Emoji'
 const ChatFooter = ({path, messages}) => {
   const [text,setText] = useState("")
   const Submit = async (e) => {

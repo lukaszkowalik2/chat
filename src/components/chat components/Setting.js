@@ -1,4 +1,4 @@
-import React,{useState, useRef} from 'react'
+import React,{useState} from 'react'
 import {SettingsIcon} from '../svgs'
 import {BiLogOut} from 'react-icons/bi'
 import {auth} from '../../firebase'

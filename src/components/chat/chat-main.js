@@ -4,6 +4,14 @@ const ChatMain = ({messages}) => {
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
   }
+ useEffect(() => {
+  window.addEventListener('scroll', handleScroll);
+  return () => window.removeEventListener('scroll', handleScroll);
+  })
+  const handleScroll = (event) => {
+    console.log("wota,")
+  // code here
+  }
   useEffect(() => {
     scrollToBottom()
     localStorage.setItem("lastChat",`${window.location.href}`);
@@ -71,7 +79,7 @@ const ChatMain = ({messages}) => {
     }
   })
   return (
-    <div className="chat-area-main">
+    <div className="chat-area-main" onScroll={handleScroll} >
     {messagesMap}
     <div ref={messagesEndRef} />
     </div>

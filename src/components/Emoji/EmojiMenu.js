@@ -1,5 +1,5 @@
 import React from 'react';
-import '../../styles/EmojiMenu.css'
+import '../../styles/EmojiMenu.scss'
 const EmojiMenu = ({x}) => {
   console.log(x)
   return (

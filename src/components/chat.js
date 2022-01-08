@@ -1,6 +1,6 @@
 import React from 'react'
-import ChatFooter from './chat components/chat-footer'
-import ChatMain from './chat components/chat-main'
+import ChatFooter from './chat/chat-footer'
+import ChatMain from './chat/chat-main'
 
 const Chat = ({path, messages}) => {
 

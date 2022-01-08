@@ -3,7 +3,7 @@ import {Camera, Landscape,Plus,Like} from '../svgs'
 import { doc, setDoc  } from "firebase/firestore"; 
 import db from '../../firebase'
 import FileUpload from './FileUpload'
-import Emoji from './Emoji'
+import Emoji from '../Emoji/Emoji'
 const ChatFooter = ({path, messages}) => {
   const [text,setText] = useState("")
   const Submit = async (e) => {

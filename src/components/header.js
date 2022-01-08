@@ -2,7 +2,7 @@ import React, { useEffect,useState} from 'react'
 import { onAuthStateChanged } from "firebase/auth";
 import {auth} from '../firebase'
 import {Logo, DarkLight} from './svgs'
-import Settings from './chat components/Setting'
+import Settings from './Setting/Setting'
 const Header = () => {
   const [uID] = useState(localStorage.getItem('uid'))
   useEffect(() => {

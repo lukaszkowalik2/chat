@@ -16,8 +16,8 @@ const ChatMain = ({messages}) => {
     scrollToBottom()
     localStorage.setItem("lastChat",`${window.location.href}`);
   }, [messages]);
-  console.table(messages)
-  const messagesMap = messages.map(message =>{
+  // console.table(messages)
+  const messagesMap = messages.map(message => {
     let d = new Date(message.time);
     let time=`${d.getDate()}/${(d.getMonth()+1)} ${d.getHours() < 10 ? "0"+ d.getHours() : d.getHours()}:${d.getMinutes() <10 ? "0"+ d.getMinutes() : d.getMinutes()}`;
     if(message.isImage){

@@ -3,6 +3,8 @@ import { onAuthStateChanged } from "firebase/auth";
 import {auth} from '../firebase'
 import {Logo, DarkLight} from './svgs'
 import Settings from './Setting/Setting'
+import { doc, updateDoc } from "firebase/firestore";
+import db from '../firebase'
 const Header = () => {
   const [uID] = useState(localStorage.getItem('uid'))
   useEffect(() => {
@@ -11,10 +13,28 @@ const Header = () => {
         const uid = user.uid;
         localStorage.setItem('uid', uid)
       } else {
-        localStorage.setItem('uid', "")
+        localStorage.clear()
       }
     });
   })
+  const handleThemeChange = async (e) => {
+    document.body.classList.toggle('dark-mode');
+    if(document.body.classList.contains('dark-mode')) {
+      const userDataRef = doc(db, 'userData', `${localStorage.getItem('uid')}`)
+      await updateDoc(userDataRef, {
+        isDark: true
+      });
+    } else {
+      const userDataRef = doc(db, 'userData', `${localStorage.getItem('uid')}`)
+      await updateDoc(userDataRef, {
+        isDark: false
+      });
+    }
+    const userDataRef = doc(db, 'userData', `${localStorage.getItem('uid')}`)
+    await updateDoc(userDataRef, {
+      color: e.target.getAttribute('data-color')
+    });
+  }
   return ( 
   <div className="header">
   <div className="logo">
@@ -24,7 +44,7 @@ const Header = () => {
    <input type="text" placeholder="Search..." />
   </div>
   <div className="user-settings">
-   <div className="dark-light">
+   <div className="dark-light" onClick={handleThemeChange}>
       <DarkLight/>
    </div>
    <div className="settings">

@@ -1,5 +1,22 @@
 import React from 'react'
+import { doc, updateDoc } from "firebase/firestore";
+import db from '../firebase'
 const Details = () => {
+  const handleChangeColor = async (e) => {
+    const userDataRef = doc(db, 'userData', `${localStorage.getItem('uid')}`)
+    await updateDoc(userDataRef, {
+      color: e.target.getAttribute('data-color')
+    });
+    const colors = document.querySelectorAll('.color');
+    colors.forEach(color => {
+      color.addEventListener('click', (e) => {
+        colors.forEach(c => c.classList.remove('selected'));
+        const theme = color.getAttribute('data-color');
+        document.body.setAttribute('data-theme', theme);
+        color.classList.add('selected');
+      });
+    });
+  }
   return (
     <div className="detail-area">
     <div className="detail-area-header">
@@ -31,10 +48,10 @@ const Details = () => {
      <div className="detail-change">
       Change Color
       <div className="colors">
-       <div className="color blue selected" data-color="blue"></div>
-       <div className="color purple" data-color="purple"></div>
-       <div className="color green" data-color="green"></div>
-       <div className="color orange" data-color="orange"></div>
+       <div className="color blue selected" data-color="blue" onClick={handleChangeColor}></div>
+       <div className="color purple" data-color="purple" onClick={handleChangeColor}></div>
+       <div className="color green" data-color="green" onClick={handleChangeColor}></div>
+       <div className="color orange" data-color="orange" onClick={handleChangeColor}></div>
       </div>
      </div>
      <div className="detail-change">

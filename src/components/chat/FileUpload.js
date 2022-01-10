@@ -47,7 +47,7 @@ uploadTask.on('state_changed',
       let id = lastElement.id + 1
       await setDoc(doc(db, `${path}`, `${id}`), {
         message: downloadURL,
-        isImage: true,
+        type: 'image',
         userID: localStorage.getItem('uid'),
         time: Date.now(),
         id: id

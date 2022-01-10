@@ -6,7 +6,7 @@ const Profile = () => {
   const [user,setUser] = useState()
   onAuthStateChanged(auth, (user) => {
     if (user) {
-      console.log(user)
+      return
     } else {
       window.location.href = 'http://localhost:3000/login'
     }

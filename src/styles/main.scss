@@ -36,6 +36,7 @@ $shadow1: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
     rgba(255, 255, 255, 1) 78%,
     rgba(255, 255, 255, 0) 100%
   );
+  --scrollbar-color: #dfdfdf;
 }
 
 [data-theme='purple'] {
@@ -90,6 +91,7 @@ $shadow1: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
   --button-color: var(--body-color);
   --input-chat-color: #6f7073;
   --detail-font-color: var(--input-chat-color);
+  --scrollbar-color: rgba(0, 0, 0, 0.4);
 }
 
 .blue {
@@ -166,7 +168,7 @@ html {
   padding: 30px 30px 0 30px;
   display: flex;
   flex-direction: column;
-  overflow: auto;
+  overflow: hidden;
 }
 
 .chat-area {
@@ -254,6 +256,22 @@ html {
   display: flex;
   flex-direction: column;
   position: relative;
+  overflow: hidden;
+  &:hover {
+    overflow-y: scroll;
+  }
+  &::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  &::-webkit-scrollbar-track {
+    background-color: transparent;
+    border-radius: 10px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--scrollbar-color);
+    border-radius: 10px;
+  }
 }
 
 .msg-profile {
@@ -390,6 +408,22 @@ html {
   }
   &-main {
     flex-grow: 1;
+    overflow: hidden;
+    &:hover {
+      overflow-y: scroll;
+    }
+    &::-webkit-scrollbar {
+      width: 10px;
+      height: 10px;
+    }
+    &::-webkit-scrollbar-track {
+      background-color: transparent;
+      border-radius: 10px;
+    }
+    &::-webkit-scrollbar-thumb {
+      background-color: var(--scrollbar-color);
+      border-radius: 10px;
+    }
   }
 }
 
@@ -467,7 +501,16 @@ html {
   width: 100%;
   height: auto;
 }
-
+.owner .chat-msg-image {
+  img {
+    border-radius: 25px 0 0 25px;
+  }
+}
+.chat-msg-image {
+  img {
+    border-radius: 25px 25px 0 25px;
+  }
+}
 .chat-area-footer {
   display: flex;
   border-top: 1px solid var(--border-color);
@@ -515,7 +558,6 @@ html {
   display: flex;
   flex-direction: column;
   align-items: center;
-
   .msg-profile {
     margin-right: 0;
     width: 60px;

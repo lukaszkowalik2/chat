@@ -27,11 +27,11 @@ const ChatMain = ({messages}) => {
     let time=`${d.getDate()}/${(d.getMonth()+1)} ${d.getHours() < 10 ? "0"+ d.getHours() : d.getHours()}:${d.getMinutes() <10 ? "0"+ d.getMinutes() : d.getMinutes()}`;
     if(message.type === 'image'){
       return(
-        <Image time={time} url={message.message} timeKey={message.time} isMine={message.userID === localStorage.getItem("uid") ? true : false}/>
+        <Image time={time} url={message.message} key={message.time} isMine={message.userID === localStorage.getItem("uid") ? true : false}/>
       )
     } else if (message.type === 'text'){
       return(
-        <Normal time={time} message={message.message} timeKey={message.time} isMine={message.userID === localStorage.getItem("uid") ? true : false} />
+        <Normal time={time} message={message.message} key={message.time} isMine={message.userID === localStorage.getItem("uid") ? true : false} />
       )
     }
   })}

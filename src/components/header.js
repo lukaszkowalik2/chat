@@ -2,15 +2,27 @@ import React, { useEffect,useState} from 'react'
 import { onAuthStateChanged } from "firebase/auth";
 import {auth} from '../firebase'
 import {Logo, DarkLight} from './svgs'
+import { doc, getDoc, updateDoc }  from '@firebase/firestore';
 import Settings from './Setting/Setting'
-import { doc, updateDoc } from "firebase/firestore";
 import db from '../firebase'
 const Header = () => {
   const [uID] = useState(localStorage.getItem('uid'))
+  const [image,setImage] = useState()
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
         const uid = user.uid;
+        async function fetch(){
+          const docRef = doc(db,"userData", uid)
+          const docSnap = await getDoc(docRef);
+          if(docSnap.exists()) {
+            setImage(docSnap.data().profilePhoto)
+          } else{
+            console.log("No such document")
+          }
+        }
+        fetch()
+          // setImage(snapshot.data())
         localStorage.setItem('uid', uid)
       } else {
         localStorage.clear()
@@ -50,7 +62,7 @@ const Header = () => {
    <div className="settings">
     <Settings/>
    </div>
-   {Boolean(uID) ? <a href={window.location.origin + "/profile"}><img className="user-profile account-profile" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/3364143/download+%281%29.png" alt="" /></a> : <a className="linkToLogIn" href="http://localhost:3000/login">Log In</a>}
+   {Boolean(uID) ? <a href={window.location.origin + "/profile"}><img className="user-profile account-profile" src={image} alt="" /></a> : <a className="linkToLogIn" href={window.location.origin +"/login"}>Log In</a>}
   </div>
  </div>);
 }

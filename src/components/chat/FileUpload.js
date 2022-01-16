@@ -49,8 +49,9 @@ uploadTask.on('state_changed',
         message: downloadURL,
         type: 'image',
         userID: localStorage.getItem('uid'),
+        reference: doc(db,`userData/${localStorage.getItem('uid')}`),
         time: Date.now(),
-        id: id
+        id: id,
       });
     });
     setImage()

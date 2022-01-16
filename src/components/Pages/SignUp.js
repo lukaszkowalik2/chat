@@ -20,7 +20,7 @@ const Login = () => {
     window.location.href = window.location.origin + "/t/1"
     else
       return;
-  },[user])
+  },[ ])
   const register = async () => {
     if(password===confirmPassword|| password<6){
       const q = query(collection(db, "userData"), where("name", "==", name));
@@ -32,17 +32,18 @@ const Login = () => {
             setIsVisable(true)
           } else {
               try{
-                await createUserWithEmailAndPassword(auth, email, password).then( userCredential =>{
+                await createUserWithEmailAndPassword(auth, email, password).then(userCredential =>{
                    setDoc(doc(db,'userData', `${userCredential.user.reloadUserInfo.localId}`), {
                     name: name,
                     profilePhoto: 'https://firebasestorage.googleapis.com/v0/b/chat-6db9a.appspot.com/o/UserProfilesImages%2FDefault.png?alt=media&token=e62b854a-6a47-42ba-8aba-3c1ae3029934',
                     isDark: false,
                     color: 'blue'
-                  });
-                localStorage.setItem('uid', userCredential.user.reloadUserInfo.localId)
+                  }).then(
+                    localStorage.setItem('uid', userCredential.user.reloadUserInfo.localId)
+                  // window.location.href = window.location.origin + "/t/1";
+                  )
                 }
                 )
-                window.location.href = window.location.origin + "/t/1"
               } catch(err){
                 console.error(err.message);
               }

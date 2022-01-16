@@ -50,7 +50,7 @@ const Header = () => {
    <div className="settings">
     <Settings/>
    </div>
-   {Boolean(uID) ? <img className="user-profile account-profile" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/3364143/download+%281%29.png" alt=""/>: <a className="linkToLogIn" href="http://localhost:3000/login">Log In</a>}
+   {Boolean(uID) ? <a href={window.location.origin + "/profile"}><img className="user-profile account-profile" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/3364143/download+%281%29.png" alt="" /></a> : <a className="linkToLogIn" href="http://localhost:3000/login">Log In</a>}
   </div>
  </div>);
 }

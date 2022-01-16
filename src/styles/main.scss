@@ -439,6 +439,12 @@ html {
   margin-top: auto;
   margin-bottom: -20px;
   position: relative;
+  .name {
+    font-size: 0.6rem;
+    position: absolute;
+    bottom: 150%;
+    right: 100%;
+  }
 }
 
 .chat-msg-date {

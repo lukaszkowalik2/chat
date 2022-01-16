@@ -5,18 +5,6 @@ import {auth} from '../../firebase'
 const Login = () => {
   const [email,setEmail] = useState("")
   const [password,setPassword] = useState("")
-  // useEffect(() => {
-  //   document.getElementById('name').addEventListener("keyup", function(e) {
-  //     if (e.key === 27 || e.key === 13) {
-  //       document.getElementById('password').focus()
-  //     }
-  //   });
-  //   document.getElementById('password').addEventListener("keyup", function(e) {
-  //     if (e.key === 27 || e.key === 13) {
-  //       document.getElementById('mainButton').className = ''
-  //     }
-  //   });
-  // })
   const handleSubmit = (e) => {
     e.preventDefault();
     signInWithEmailAndPassword(auth,email,password)

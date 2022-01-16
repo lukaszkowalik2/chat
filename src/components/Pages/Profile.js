@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import '../../styles/profile.scss'
 import {onAuthStateChanged } from 'firebase/auth'
+import { onSnapshot, collection, orderBy, query, doc, getDoc }  from '@firebase/firestore';
+import db from '../../firebase'
 import {auth} from '../../firebase'
 const Profile = () => {
   const [user,setUser] = useState()
@@ -12,7 +14,19 @@ const Profile = () => {
     }
   });
   useEffect(() => {
-  })
+        async function fetchUserData() {
+					// const q = query(collection(db, `${localStorage.getItem('uid')}`))
+					// onSnapshot(q,(snapshot) => {
+					// 	setUser(snapshot.docs.map(doc => doc.data()))
+					// 	})
+          const docRef = doc(db, "userData", `${localStorage.getItem("uid")}`);
+          const docSnap = await getDoc(docRef);
+					setUser(docSnap.doc())
+					console.log(user);
+        }
+        fetchUserData()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[user])
   return (
     <div id="bodyProfile">
     <div class="card-container">

@@ -9,7 +9,7 @@ import Header from './components/header';
 import db from './firebase'
 import Loading from './components/Pages/Loading'
 const App = () => {
-  const [path,setPath] = useState(window.location.href.split('/')[4])
+  const [path] = useState(window.location.href.split('/')[4])
   const [messages,setMessages] = useState(undefined)
   const [userData,setUserData] = useState()
   useEffect(() => {
@@ -17,14 +17,12 @@ const App = () => {
       onSnapshot(q,(snapshot) => {
           setMessages(snapshot.docs.map(doc => doc.data()))
         })
-        console.log(localStorage)
         async function fetchUserData() {
           const docRef = doc(db, "userData", `${localStorage.getItem("uid")}`);
           const docSnap = await getDoc(docRef);
           if (docSnap.exists()) {
             setUserData(docSnap.data());
           } else {
-            // doc.data() will be undefined in this case
             console.log("No such document!");
           }
         }
@@ -60,14 +58,6 @@ const App = () => {
         return
       
     }
-        // colors.forEach(color => {
-        //   color.addEventListener('click', (e) => {
-        //     colors.forEach(c => c.classList.remove('selected'));
-        //     const theme = color.getAttribute('data-color');
-        //     document.body.setAttribute('data-theme', theme);
-        //     color.classList.add('selected');
-        //   });
-        // });
   },[userData])
   return (
     <>

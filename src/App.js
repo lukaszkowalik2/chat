@@ -17,6 +17,7 @@ const App = () => {
       onSnapshot(q,(snapshot) => {
           setMessages(snapshot.docs.map(doc => doc.data()))
         })
+        console.log(q)
         async function fetchUserData() {
           const docRef = doc(db, "userData", `${localStorage.getItem("uid")}`);
           const docSnap = await getDoc(docRef);

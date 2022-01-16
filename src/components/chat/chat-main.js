@@ -19,6 +19,7 @@ const ChatMain = ({messages}) => {
     scrollToBottom()
     localStorage.setItem("lastChat",`${window.location.href}`);
   }, [messages]);
+
   return (
     // <div className="chat-area-main" onScroll={handleScroll} >
     <div className="chat-area-main">
@@ -27,11 +28,11 @@ const ChatMain = ({messages}) => {
     let time=`${d.getDate()}/${(d.getMonth()+1)} ${d.getHours() < 10 ? "0"+ d.getHours() : d.getHours()}:${d.getMinutes() <10 ? "0"+ d.getMinutes() : d.getMinutes()}`;
     if(message.type === 'image'){
       return(
-        <Image time={time} url={message.message} key={message.time} isMine={message.userID === localStorage.getItem("uid") ? true : false} name={message.name} profileImage={message.profileImage}/>
+        <Image time={time} url={message.message} key={message.time} isMine={message.userID === localStorage.getItem("uid") ? true : false} reference={message.reference}/>
       )
     } else if (message.type === 'text'){
       return(
-        <Normal time={time} message={message.message} key={message.time} isMine={message.userID === localStorage.getItem("uid") ? true : false} name={message.name} profileImage={message.profileImage}/>
+        <Normal time={time} message={message.message} key={message.time} isMine={message.userID === localStorage.getItem("uid") ? true : false} reference={message.reference}/>
       )
     }
   })}

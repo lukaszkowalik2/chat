@@ -1,9 +1,18 @@
-import React from 'react'
-const Image = ({time, isMine, url, name, profileImage}) => {
+import React,{useState} from 'react'
+import { onSnapshot, query }  from '@firebase/firestore';
+
+const Image = ({time, isMine, url, reference}) => {
+  const [name,setName] = useState()
+  const [profileImage, setProfileImage] = useState()
+  const q = query(reference)
+  onSnapshot(q,(snapshot) => {
+    setProfileImage(snapshot.data().profilePhoto)
+    setName(snapshot.data().name)
+    })
   return(
     <div className={"chat-msg " + (isMine ? 'owner' : '')}>
       <div className="chat-msg-profile">
-      <div className="name">{name}</div>
+      <div className="name">{isMine ? "" : name}</div>
        <img className="chat-msg-img" src={profileImage} alt="" />
        <div className="chat-msg-date">Message sent {time}</div>
   </div>

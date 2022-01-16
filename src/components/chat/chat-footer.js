@@ -1,21 +1,15 @@
-import React, {useState,useEffect} from 'react'
+import React, {useState} from 'react'
 import {Camera, Landscape,Plus,Like} from '../svgs'
-import { doc, onSnapshot,setDoc } from "firebase/firestore";
+import { doc,setDoc } from "firebase/firestore";
 import db from '../../firebase'
 import FileUpload from './FileUpload'
 import Emoji from '../Emoji/Emoji'
 const ChatFooter = ({path, messages}) => {
   const [text,setText] = useState("")
-  const [user,setUser] = useState("")
-  useEffect(() =>{
-    onSnapshot(doc(db, "userData", localStorage.getItem('uid')), (doc) => {
-      setUser(doc.data())
-  });
-  },[])
   const Submit = async (e) => {
     e.preventDefault();
     if (!text.replace(/\s/g, '').length || !text) {
-      console.log('string only contains whitespace (ie. spaces, tabs or line breaks)');
+      return
     } else {
       let lastElement = messages[messages.length - 1];
       let id = parseInt(lastElement.id) + 1
@@ -23,10 +17,9 @@ const ChatFooter = ({path, messages}) => {
         message: text.trim(),
         type: 'text',
         userID: localStorage.getItem('uid'),
+        reference: doc( db,`userData/${localStorage.getItem('uid')}`),
         time: Date.now(),
         id: id,
-        profileImage: user.profilePhoto,
-        name: user.name
       });
       setText("")
     }

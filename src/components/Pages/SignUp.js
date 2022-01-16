@@ -20,7 +20,8 @@ const Login = () => {
     window.location.href = window.location.origin + "/t/1"
     else
       return;
-  },[ ])
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[])
   const register = async () => {
     if(password===confirmPassword|| password<6){
       const q = query(collection(db, "userData"), where("name", "==", name));

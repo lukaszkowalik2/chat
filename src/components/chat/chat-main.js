@@ -2,6 +2,7 @@
 import React, { useRef, useEffect } from 'react'
 import Normal from './messageTypes/Normal'
 import Image from './messageTypes/Image'
+
 const ChatMain = ({messages}) => {
   const messagesEndRef = useRef(null)
   const scrollToBottom = () => {

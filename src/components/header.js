@@ -51,9 +51,6 @@ const Header = () => {
   <div className="logo">
     <Logo/>
   </div>
-  <div className="search-bar">
-   <input type="text" placeholder="Search..." />
-  </div>
   <div className="user-settings">
    <div className="dark-light" onClick={handleThemeChange}>
       <DarkLight/>
@@ -61,7 +58,7 @@ const Header = () => {
    <div className="settings">
     <Settings/>
    </div>
-   {Boolean(uID) ? <a href={window.location.origin + "/profile"}><img className="user-profile account-profile" src={image} alt="" /></a> : <a className="linkToLogIn" href={window.location.origin +"/login"}>Log In</a>}
+   {Boolean(uID) ? <a href={window.location.origin + "/profile" } className="user-profile"><img className="user-profile" src={image} alt="" /></a> : <a className="linkToLogIn" href={window.location.origin +"/login"}>Log In</a>}
   </div>
  </div>);
 }

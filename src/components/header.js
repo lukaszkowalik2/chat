@@ -22,7 +22,6 @@ const Header = () => {
           }
         }
         fetch()
-          // setImage(snapshot.data())
         localStorage.setItem('uid', uid)
       } else {
         localStorage.clear()

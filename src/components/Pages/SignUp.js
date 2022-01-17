@@ -1,7 +1,6 @@
 import React, {useEffect,useState} from 'react'
 import {createUserWithEmailAndPassword, onAuthStateChanged } from 'firebase/auth'
 import { collection, query, where, getDocs,doc, setDoc } from "firebase/firestore";
-
 import db from '../../firebase'
 import '../../styles/SignUp.scss'
 import {auth} from '../../firebase'

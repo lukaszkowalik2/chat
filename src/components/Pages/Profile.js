@@ -1,11 +1,17 @@
 import React, { useState, useEffect } from 'react'
 import '../../styles/profile.scss'
 import {onAuthStateChanged } from 'firebase/auth'
-import { onSnapshot, collection, orderBy, query, doc, getDoc }  from '@firebase/firestore';
+import { doc, getDoc }  from '@firebase/firestore';
 import db from '../../firebase'
 import {auth} from '../../firebase'
+import Name from '../profile/Name'
+import ProfileImage from '../profile/ProfileImage'
 const Profile = () => {
-  const [user,setUser] = useState()
+  const [user] = useState()
+	const [profilePhoto,setProfilePhoto] = useState()
+	const [name,setName] = useState()
+	const [nameIsClicked,setNameIsClicked] = useState(false)
+	const [profileImageisClicked,setProfileImageIsClicked] = useState(false)
   onAuthStateChanged(auth, (user) => {
     if (user) {
       return
@@ -14,50 +20,69 @@ const Profile = () => {
     }
   });
   useEffect(() => {
-        async function fetchUserData() {
-					// const q = query(collection(db, `${localStorage.getItem('uid')}`))
-					// onSnapshot(q,(snapshot) => {
-					// 	setUser(snapshot.docs.map(doc => doc.data()))
-					// 	})
-          const docRef = doc(db, "userData", `${localStorage.getItem("uid")}`);
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const uid = user.uid;
+        async function fetch(){
+          const docRef = doc(db,"userData", uid)
           const docSnap = await getDoc(docRef);
-					setUser(docSnap.doc())
-					console.log(user);
+          if(docSnap.exists()) {
+						setProfilePhoto(docSnap.data().profilePhoto)
+						setName(docSnap.data().name)
+          } else{
+            console.log("No such document")
+          }
+					localStorage.setItem('uid', uid)
         }
-        fetchUserData()
+        fetch()
+      } else {
+        localStorage.clear()
+				window.location.href = window.location.origin + "/login"
+      }
+    });
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[user])
   return (
     <div id="bodyProfile">
-    <div class="card-container">
-	<img class="round" src="https://randomuser.me/api/portraits/women/79.jpg" alt="user" onMouseOver={() => console.log('dziala')} onMouseOut={() => console.log('nie ma')}/>
-  {/* <div id="hover">
-    <div id="text">Change Profile Image</div>
-    </div> */}
-	<h3>Ricky Park</h3>
-	<h6>New York</h6>
-	<p>User interface designer and <br/> front-end developer</p>
-	<div class="buttons">
-		<button class="primary">
-			Message
-		</button>
-		<button class="primary ghost">
-			Following
-		</button>
-	</div>
-	<div class="skills">
-		<h6>Skills</h6>
-		<ul>
-			<li>UI / UX</li>
-			<li>Front End Development</li>
-			<li>HTML</li>
-			<li>CSS</li>
-			<li>JavaScript</li>
-			<li>React</li>
-			<li>Node</li>
-		</ul>
-	</div>
+			{nameIsClicked ? <Name disablePopup={() =>setNameIsClicked(false) } setUpdatedName={setName} username={name}/> : "" }
+			{profileImageisClicked? <ProfileImage disablePopup={() =>setProfileImageIsClicked(false) } setUpdatedName={setProfilePhoto} profilePhoto={profilePhoto}/> : ""}
+    <div className="card-container">
+		<div className="item">
+			<div className="headerItem"> Profile Image</div>
+			<div className="flex">
+				<div className="photo">	
+					<img src={profilePhoto} alt="" />
+				</div>
+				<button className="change" onClick={() => setProfileImageIsClicked(true)}>Change</button>
+			</div>
+		</div>
+		<div className="item">
+			<div className="headerItem">USER NAME</div>
+			<div className="flex">
+				<div className="text">{name}</div>
+				<button className="change" onClick={() => setNameIsClicked(true)}>Change</button>	
+			</div>
+		</div>
+		<div className="item">
+			<div className="headerItem">ADRESS EMAIL</div>
+			<div className="flex">
+				<div className="text">Doesnt work yet</div>
+				<button className="change" disabled>Change</button>
+			</div>
+		</div>
+		<div className="item">
+			<div className="headerItem">PASSWORD</div>
+			<div className="flex">
+				<div className="text">Doesnt work yet</div>
+				<button className="change" disabled>Change</button>
+			</div>
+		</div>
 </div>
+		<div className="returnflex">
+			<div className="return">
+				<a href={window.location.origin + "/t"}>Return</a>
+			</div>
+		</div>
 </div>
   );
 }
